@@ -1,8 +1,12 @@
 SRC=01.cpp 02.cpp
+EXE=$(subst .cpp,.bin,$(SRC))
 CPPFLAGS=-std=c++11 -g
 
+all: $(EXE)
 
-all: .cpp.o
+.SUFFIXES:	.cpp .bin
+.cpp.bin:
+	g++ $(CPPFLAGS) $< -o $@
 
-.cpp.o:
-	g++ $(CPPFLAGS) $< -o $(subst .cpp,.bin,$(SRC))
+clean:
+	rm *.bin
