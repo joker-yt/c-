@@ -6,7 +6,7 @@ all: $(EXE)
 
 .SUFFIXES:	.cpp .bin
 .cpp.bin:
-	g++ $(CPPFLAGS) $< -o $@
+	g++ $< -o $@ $(CPPFLAGS)
 
 clean:
 	rm *.bin
