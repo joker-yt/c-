@@ -1,4 +1,4 @@
-SRC=01.cpp 02.cpp
+SRC=01.cpp 02.cpp 03.cpp
 EXE=$(subst .cpp,.bin,$(SRC))
 CPPFLAGS=-std=c++11 -g
 

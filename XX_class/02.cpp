@@ -13,9 +13,16 @@ public:
     std::cout << strConstructor << " with param[" << _name << "]" << std::endl;
   };
   // copy construcor
-  CTest(const CTest &tst) { std::cout << strCopyConstructor << std::endl; };
+  CTest(const CTest &tst) {
+    std::cout << strCopyConstructor << std::endl;
+    // you need to use initilizer list
+    // you are allowed to use std::copy
+  };
   // move constructor
-  CTest(CTest &&tst) noexcept { std::cout << strMoveConstructor << std::endl; };
+  CTest(CTest &&tst) noexcept {
+    std::cout << strMoveConstructor << std::endl;
+    // it may be satisfied with "default".
+  };
   virtual ~CTest() { std::cout << strDestructor << std::endl; };
 
   // copy assignment
@@ -27,7 +34,11 @@ public:
   // move assignment
   CTest &operator=(CTest &&obj) {
     std::cout << strMoveAssignmentOperator << std::endl;
-    return *this;
+    if (this == &obj) {
+      return *this;
+    }
+
+    return *this = std::move(obj);
   };
 };
 
