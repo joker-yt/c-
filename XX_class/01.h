@@ -9,10 +9,13 @@ private:
   /* data */
 public:
   CTest() { std::cout << strConstructor << std::endl; };
-  // copy construcor
+  // copy construcor(parameter needs "const")
   CTest(const CTest &tst) { std::cout << strCopyConstructor << std::endl; };
-  // move constructor
-  CTest(const CTest &&tst) { std::cout << strMoveConstructor << std::endl; };
+  // move constructor(parameter doesn't need "const")
+  CTest(CTest &&tst) {
+    std::cout << strMoveConstructor << std::endl;
+    *this = std::move(tst);
+  };
   virtual ~CTest() { std::cout << strDestructor << std::endl; };
 
   // copy assignment
