@@ -1,6 +1,6 @@
-SRC=01.cpp
+SRC=01.cpp 02.cpp 03.cpp
 EXE=$(subst .cpp,.bin,$(SRC))
-CPPFLAGS=-std=c++11 -MMD -g
+CPPFLAGS=-std=c++14 -MMD -g
 
 all: $(EXE)
 -include $(DEPS)

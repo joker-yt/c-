@@ -16,3 +16,37 @@ XX_const
 	===========
 
 -	create "const" object, and call method
+
+---
+
+XX_lambda
+=========
+
+-	std::function<return type(parameter type)> variable = lambda;
+
+---
+
+XX_lambda Q.
+============
+
+1.	create lambda by for_each
+2.	use std::functon by lambda
+3.	use std::functon by functional object
+
+---
+
+XX_ptr  
+ ===========
+
+-	auto_ptr has a resk, so must NOT use.
+
+	-	if pointer would not be shared, use unique pointer  
+	-	if pointer would be shared, use shared pointer
+
+---
+
+XX_ptr Q.
+=========
+
+-	make unique pointer
+-	make shared pointer
