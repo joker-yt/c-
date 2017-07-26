@@ -13,25 +13,41 @@ private:
   int _idx;
 
 public:
-  CMyClass() : _idx(99) { std::cout << __FUNCTION__ << " -> " << _idx << "\n"; }
+  CMyClass() : _idx(-1) { std::cout << __FUNCTION__ << " -> " << _idx << "\n"; }
   CMyClass(int n) : _idx(n) {
     std::cout << __FUNCTION__ << "(with param) -> " << _idx << "\n";
   };
   CMyClass(const CMyClass &obj) : _idx(obj._idx) {
     std::cout << __FUNCTION__ << "(copy) -> " << _idx << "\n";
   };
-  CMyClass(const CMyClass &&obj) : _idx(obj._idx) {
-    std::cout << __FUNCTION__ << "(move) -> " << _idx << "\n";
+  CMyClass(CMyClass &&obj) : _idx(obj._idx) {
+    std::cout << __FUNCTION__ << "(move) -> " << _idx << " " << std::hex << &obj
+              << "\n";
   };
   virtual ~CMyClass() { std::cout << __FUNCTION__ << " -> " << _idx << "\n"; };
   int Value() { return _idx; }
   CMyClass &operator=(const CMyClass &obj) {
+    std::cout << "operator=(copy) " << obj._idx << " " << std::hex << &obj
+              << std::endl;
     std::cout << "A"
               << "\n";
-    CMyClass tmp = *this;
+    CMyClass tmp = obj;
     std::cout << "B"
               << "\n";
-    std::swap(std::move(tmp), std::move(obj));
+    std::swap(*this, tmp);
+    std::cout << "C"
+              << "\n";
+    return *this;
+  }
+  CMyClass &operator=(CMyClass &&obj) {
+    std::cout << "operator=(move) " << obj._idx << " " << std::hex << &obj
+              << std::endl;
+    std::cout << "A"
+              << "\n";
+    CMyClass tmp = obj;
+    std::cout << "B"
+              << "\n";
+    std::swap(*this, tmp);
     std::cout << "C"
               << "\n";
     return *this;
@@ -60,9 +76,19 @@ int main(int argc, char *argv[]) {
 void func01() {
   std::unordered_map<std::string, CMyClass> mp;
   int n = 1;
-  mp[std::to_string(n)] = CMyClass{n};
+  std::cout << "-------------" << std::endl;
+  // mp[std::to_string(n)] = CMyClass{n};
+  CMyClass obj1{5};
+  std::cout << "obj1:" << obj1.Value() << " " << std::hex << &obj1 << std::endl;
+  CMyClass obj2{};
+  std::cout << "obj2:" << obj2.Value() << " " << std::hex << &obj2 << std::endl;
+  std::swap(obj1, obj2);
+
+  return;
+  std::cout << "-------------" << std::endl;
   n++;
   mp[std::to_string(n)] = CMyClass{n};
+  std::cout << "-------------" << std::endl;
   n++;
 
   for (int i = 1; i <= n; i++) {
