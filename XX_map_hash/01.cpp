@@ -13,23 +13,27 @@ private:
   int _idx;
 
 public:
-  CMyClass() : _idx(99) { std::cout << __FUNCTION__ << " -> " << _idx << "\n"; }
+  CMyClass() : _idx(-1) { std::cout << __FUNCTION__ << " -> " << _idx << "\n"; }
   CMyClass(int n) : _idx(n) {
     std::cout << __FUNCTION__ << "(with param) -> " << _idx << "\n";
   };
   CMyClass(const CMyClass &obj) : _idx(obj._idx) {
     std::cout << __FUNCTION__ << "(copy) -> " << _idx << "\n";
   };
-  CMyClass(const CMyClass &&obj) : _idx(obj._idx) {
-    std::cout << __FUNCTION__ << "(move) -> " << _idx << "\n";
+  CMyClass(CMyClass &&obj) : _idx(obj._idx) {
+    std::cout << __FUNCTION__ << "(move) -> " << _idx << " " << std::hex << &obj
+              << "\n";
   };
   virtual ~CMyClass() { std::cout << __FUNCTION__ << " -> " << _idx << "\n"; };
   int Value() { return _idx; }
   CMyClass &operator=(CMyClass &&obj) {
     std::cout << "operator=(move) -> " << _idx << "\n";
     this->move(obj);
+    return *this;
   }
   CMyClass &operator=(const CMyClass &obj) {
+    std::cout << "operator=(copy) " << obj._idx << " " << std::hex << &obj
+              << std::endl;
     std::cout << "A"
               << "\n";
     CMyClass tmp = obj;
