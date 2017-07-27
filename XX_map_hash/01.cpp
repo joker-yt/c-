@@ -25,17 +25,25 @@ public:
   };
   virtual ~CMyClass() { std::cout << __FUNCTION__ << " -> " << _idx << "\n"; };
   int Value() { return _idx; }
+  CMyClass &operator=(CMyClass &&obj) {
+    std::cout << "operator=(move) -> " << _idx << "\n";
+    this->move(obj);
+  }
   CMyClass &operator=(const CMyClass &obj) {
     std::cout << "A"
               << "\n";
-    CMyClass tmp = *this;
+    CMyClass tmp = obj;
     std::cout << "B"
               << "\n";
-    std::swap(std::move(tmp), std::move(obj));
+    // infinite loop!
+    // std::swap(*this, tmp);
+    this->swap(tmp);
     std::cout << "C"
               << "\n";
     return *this;
   }
+  void swap(CMyClass obj) { std::swap(_idx, obj._idx); }
+  void move(CMyClass obj) { _idx = std::move(obj._idx); }
 };
 
 int main(int argc, char *argv[]) {
@@ -59,14 +67,21 @@ int main(int argc, char *argv[]) {
  */
 void func01() {
   std::unordered_map<std::string, CMyClass> mp;
-  int n = 1;
-  mp[std::to_string(n)] = CMyClass{n};
+  int n = 0;
+  std::cout << "-------------------"
+            << "\n";
   n++;
   mp[std::to_string(n)] = CMyClass{n};
+  std::cout << "-------------------"
+            << "\n";
   n++;
+  mp[std::to_string(n)] = CMyClass{n};
+  std::cout << "-------------------"
+            << "\n";
 
   for (int i = 1; i <= n; i++) {
-    std::cout << std::to_string(i) << mp[std::to_string(i)].Value() << "\n";
+    std::cout << std::to_string(i) << " " << mp[std::to_string(i)].Value()
+              << "\n";
   }
 }
 /*! \fn func
