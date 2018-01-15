@@ -1,4 +1,4 @@
-SRC=01.cpp
+SRC=01-01.cpp
 OBJS=$(subst .cpp,.o,$(SRC))
 EXE=$(subst .cpp,.bin,$(SRC))
 CPPFLAGS=-std=c++11 -MMD -g

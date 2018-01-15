@@ -12,3 +12,4 @@ XX_class Q.
 2.	call each constructor, destructor, each operator(copy, move, ...)
 3.	copy constructor, operator
 4.	move constructor, operator
+5.  final, override method
