@@ -25,10 +25,16 @@ public:
 };
 
 int main(int argc, char *argv[]) {
+  cout << __FUNCTION__ << ":: next will be called constructor" << endl;
   CTest cl;
   cl.method();
-  CTest cl2{move(cl)};
+  cout << __FUNCTION__ << "::cl2 created(copy const)" << endl;
+  CTest cl2{cl};
+  cout << __FUNCTION__ << "::cl3 created(universal reference, rvalue reference)"
+       << endl;
+  CTest cl3{move(cl)};
 
+  cout << __FUNCTION__ << ":: next will be called constructor, again" << endl;
   unique_ptr<CTest> p{new CTest};
   p->method();
   p->method();

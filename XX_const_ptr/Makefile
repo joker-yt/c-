@@ -10,4 +10,4 @@ all: $(EXE)
 	g++ $< -o $@ $(CPPFLAGS)
 
 clean:
-	rm -fr *.bin *.gch *.d
+	rm -fr *.bin *.gch *.d *.o

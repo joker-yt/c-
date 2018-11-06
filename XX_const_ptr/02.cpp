@@ -29,8 +29,9 @@ void func2() {
     return std::to_string(n);
   };
 
-  std::string ret = f_lambda(10);
-  std::cout << "f_lambda returns -> " << ret << std::endl;
+  std::string ret{"f_lambda returns -> "};
+  ret += f_lambda(10);
+  std::cout << ret << std::endl;
 }
 
 /*! void func3()
