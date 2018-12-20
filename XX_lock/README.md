@@ -2,7 +2,7 @@
 
 ## Expected sequence
 
-```
+```puml
 @startuml
 main -> T1 : <<create>>
 activate main
@@ -20,7 +20,7 @@ destroy T1
 ```
 
 ## T1 checked before main is ready(Ex1)
-```
+```puml
 @startuml
 main -> T1 : <<create>>
 main -> main : prepare to start work
@@ -41,7 +41,7 @@ destroy T1
 
 ## T1 is modified to wait, but fails to catch the notification from main.(Ex2)
 
-```
+```puml
 @startuml
 main -> T1 : <<create>>
 main -> main : prepare to start work
@@ -64,7 +64,7 @@ end note
 ```
 
 ## Example of successful pattern(Ex3)
-```
+```puml
 @startuml
 main -> T1 : <<create>>
 main -> main : prepare to start work
