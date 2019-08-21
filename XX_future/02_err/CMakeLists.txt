@@ -20,7 +20,8 @@ link_directories(${LIBI18N_LIBRARY_DIRS})
 
 link_directories(${PROJECT_SOURCE_DIR}/../../../tool/libs)
 include_directories(mytime ${PROJECT_SOURCE_DIR}/../../../tool/include)
-add_executable(mainbin ${PROJECT_SOURCE_DIR}/src/main.cpp)
-#target_link_libraries(mainbin mytime ${LIBI18N_LIBRARY_DIRS})
-install(TARGETS mainbin
+add_executable(01_broken_promise ${PROJECT_SOURCE_DIR}/src/01_broken_promise.cpp)
+add_executable(02_future_already_retrieved ${PROJECT_SOURCE_DIR}/src/02_future_already_retrieved.cpp)
+target_link_libraries(02_future_already_retrieved pthread)
+install(TARGETS 01_broken_promise 02_future_already_retrieved
         RUNTIME DESTINATION ./bin)
