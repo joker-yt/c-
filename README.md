@@ -17,3 +17,10 @@ practice for c++
 - [ ] 
 - [ ] 
 - [ ] 
+
+## good c++ code to read
+- google test
+- [protocol buffer](https://github.com/protocolbuffers/protobuf/releases)
+- [chromium](http://dev.chromium.org/developers/how-tos/get-the-code)
+- mozilla project
+- boost
