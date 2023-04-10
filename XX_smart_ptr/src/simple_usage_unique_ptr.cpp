@@ -8,10 +8,12 @@ template <typename T>
 T templ_func(T x)
 {
     // basic usage
+    // x = size of area
     std::unique_ptr<T> p = make_unique<T>(x);
     cout << *p << endl;
 
     // "move"
+    // unique_ptr can not be copied, so that move is used to forward the ownership.
     std::unique_ptr<T> q = std::move(p);
     cout << *q << endl;
 

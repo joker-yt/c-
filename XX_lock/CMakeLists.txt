@@ -19,3 +19,6 @@ target_link_libraries(ex2.out pthread)
 
 add_executable(ex3.out ${PROJECT_SOURCE_DIR}/src/ex3.cpp)
 target_link_libraries(ex3.out pthread)
+
+add_executable(ex4.out ${PROJECT_SOURCE_DIR}/src/ex4.cpp)
+target_link_libraries(ex4.out pthread)

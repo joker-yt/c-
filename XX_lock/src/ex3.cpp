@@ -19,22 +19,26 @@ int check_value = 0;
 //////////////////////////////////////
 // T1
 //////////////////////////////////////
-void T1() {
+void T1()
+{
   cout << "T1: launched." << endl;
 
   ///////////////////
   //!!!!!! custom to this example
-  sleep(2);
   {
     unique_lock<mutex> lk{mtx};
     cout << __FUNCTION__ << ":get lock" << endl;
-    cv.wait(lk, [] { return is_ready; });
+    cv.wait(lk, []
+            { return is_ready; });
   }
 
   cout << "T1: just before check." << endl;
-  if (check_value == 1) {
+  if (check_value == 1)
+  {
     cout << "T1: main has been ready, and work will start correctly." << endl;
-  } else {
+  }
+  else
+  {
     cout << "T1: main has been not ready yet!!! work failed to start!!!"
          << endl;
   }
@@ -44,14 +48,25 @@ void T1() {
 //////////////////////////////////////
 // main
 //////////////////////////////////////
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
   thread t1(T1);
 
+  sleep(1);
+  {
+    lock_guard<mutex> lk{mtx};
+    is_ready = false;
+    check_value = 1;
+    cout << "first notification" << endl;
+    cv.notify_all();
+  }
+  sleep(1);
   {
     lock_guard<mutex> lk{mtx};
     is_ready = true;
     check_value = 1;
+    cout << "second notification" << endl;
     cv.notify_all();
   }
 
